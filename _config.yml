@@ -1,1 +1,8 @@
 theme: jekyll-theme-tactile
+relative_links:
+  enabled: true
+  collections: true
+include:
+  - README.md
+  - Tooltips-overview.md
+  - Tooltips:-How-to-add-a-tooltip.md
