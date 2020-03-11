@@ -4,7 +4,7 @@ There is only one acceptable way to add a tooltip, and that is by selecting the 
 
 **Figure 1. Edit component**
 
-Then click on the tooltip text box. 
+Then click on the tooltip text box.
 
 ![Tooltip box](https://user-images.githubusercontent.com/61820359/76084678-51d0bc00-5fa8-11ea-8871-cea57f9cd2c6.png)
 
@@ -12,6 +12,6 @@ Then click on the tooltip text box.
 
 It is never acceptable to add html content via the Form Builder palette to create a tooltip for a field. This is because you will be adding unnecessary code which may cause the form to render too slowly. Also the more code there is, the more opportunities there are for errors.
 
-**As a general rule you should not be editing code in JSON in order to build forms. One exception to this is adding your [tooltip title](https://github.com/DigitalPatterns/design-guidelines/wiki/Tooltips:-The-tooltip-title). If you find you are editing JSON ask yourself if there is actually a feature for this in builder that you are not using. If there is no existing feature consult with Forms Platform development team.**
+**As a general rule you should not be editing code in JSON in order to build forms. One exception to this is adding your [tooltip title](toolip/Tooltips:-The-tooltip-title). If you find you are editing JSON ask yourself if there is actually a feature for this in builder that you are not using. If there is no existing feature consult with Forms Platform development team.**
 
-The tooltip text box is where you will enter your [tooltip explanation](https://github.com/DigitalPatterns/design-guidelines/wiki/Tooltips:-The-tooltip-explanation).
+The tooltip text box is where you will enter your [tooltip explanation](tooltip/Tooltips:-The-tooltip-explanation).
