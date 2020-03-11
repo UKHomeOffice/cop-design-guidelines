@@ -1,7 +1,5 @@
 ---
 title: Design Guidelines
-url: https://digitalpatterns.github.io/design-guidelines/
-description: Design Guidelines for Forms and BPMN / DMN Models
 timezone: UTC
 collections:
   posts:
@@ -10,6 +8,8 @@ collections:
   uploads:
     title: Uploads
     output: true
+url: https://digitalpatterns.github.io/design-guidelines/
+description: Design Guidelines for Forms and BPMN / DMN Models
 theme: jekyll-theme-tactile
 relative_links:
   enabled: true
