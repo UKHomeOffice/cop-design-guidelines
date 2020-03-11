@@ -20,3 +20,59 @@ navigation:
   url: "/design-guidelines/tooltips/overview"
 plugins:
   - jekyll-seo-tag
+  
+topnav_title: Form Guidelines
+# this appears on the top navigation bar next to the home button
+site_title: Guidelines for Forms and BPMN / DMN
+# this appears in the html browser tab for the site title (seen mostly by search engines, not users)
+company_name: Digital Patterns
+# this appears in the footer
+github_editme_path: digitalpatterns/design-guidelinex/blob/gh-pages/
+exclude:
+  - .idea/
+  - .gitignore
+  - vendor
+  
+collections:
+  tooltips:
+    output: false
+# collections are declared here. this renders the content in _tooltips and processes it, but doesn't output it as actual files in the output unless you change output to true
+
+defaults:
+  -
+    scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+      comments: false
+      # if you don't want to use Commento.io and just hide comments, change true to false wherever you see the comments property
+      search: true
+      sidebar: home_sidebar
+      topnav: topnav
+  -
+    scope:
+      path: ""
+      type: "tooltips"
+    values:
+      layout: "page"
+      search: true
+      tooltip: true
+
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      comments: false
+      # if you don't want to use Commento.io and just hide comments, change true to false wherever you see the comments property
+      search: true
+      sidebar: home_sidebar
+      topnav: topnav
+
+sidebars:
+- home_sidebar
+- mydoc_sidebar
+
+github: [metadata]
