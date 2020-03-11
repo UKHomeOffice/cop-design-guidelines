@@ -1,4 +1,4 @@
-Having filled in your [tooltip explanation](https://github.com/DigitalPatterns/design-guidelines/wiki/Tooltips:-The-tooltip-explanation) you now need to create a title for the tooltip. If you do not create a custom title for the tooltip it will display with the default `Help`. It is recommended that you use a custom title rather than resorting to the default. 
+Having filled in your [tooltip explanation](/design-guidelines/tooltips/tooltip-explanation) you now need to create a title for the tooltip. If you do not create a custom title for the tooltip it will display with the default `Help`. It is recommended that you use a custom title rather than resorting to the default. 
 
 To do this go to the field in the builder. Click the `Edit JSON` button.
 

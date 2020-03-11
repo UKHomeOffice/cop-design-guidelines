@@ -14,4 +14,4 @@ It is never acceptable to add html content via the Form Builder palette to creat
 
 **As a general rule you should not be editing code in JSON in order to build forms. One exception to this is adding your [tooltip title](/design-guidelines/tooltips/Tooltips:-The-tooltip-title). If you find you are editing JSON ask yourself if there is actually a feature for this in builder that you are not using. If there is no existing feature consult with Forms Platform development team.**
 
-The tooltip text box is where you will enter your [tooltip explanation](/design-guidelines/tooltips/Tooltips:-The-tooltip-explanation).
+The tooltip text box is where you will enter your [tooltip explanation](/design-guidelines/tooltips/tooltip-explanation).
