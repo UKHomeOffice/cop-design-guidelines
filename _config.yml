@@ -18,3 +18,5 @@ relative_links:
 navigation:
 - title: Form design guidelines
   url: "/design-guidelines/tooltips/overview"
+plugins:
+  - jekyll-seo-tag
