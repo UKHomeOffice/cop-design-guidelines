@@ -1,4 +1,6 @@
-The tooltip box is where you will add your tooltip explanation. This is the sentence or brief paragraph that will appear when the user clicks on the [tooltip title](/design-guidelines/tooltips/tooltip-title). The information provided in the explanation is very context-specific. You may need to consult with your content designer or user researcher. However there are some general rules. The tooltip explanation should clarify for the user what is required in the associated field. It is alright to use specialist terminology your user will understand, but keep the explanation as simple and clear as possible. The explanation can be typed directly into the ``Tooltip`` box in the builder without the need to use html markup. 
+# Tooltip Explanation
+
+The tooltip box is where you will add your tooltip explanation. This is the sentence or brief paragraph that will appear when the user clicks on the [tooltip title](/design-guidelines/tooltips/tooltip-title). The information provided in the explanation is very context-specific. You may need to consult with your content designer or user researcher. However there are some general rules. The tooltip explanation should clarify for the user what is required in the associated field. It is alright to use specialist terminology your user will understand, but keep the explanation as simple and clear as possible. The explanation can be typed directly into the ``Tooltip`` box in the builder without the need to use html markup.
 
 
 ![add-tooltip-description-modal](https://user-images.githubusercontent.com/61820359/76081828-e08e0a80-5fa1-11ea-8a7e-9b4b04054f40.png)
@@ -11,3 +13,11 @@ If you need to use html markup, for example to create a summary list or a table,
 
 
 **Figure 4. Tooltip explanation with markup**
+
+[Tooltip overview](/design-guidelines/tooltips/overview)
+
+[How to add a tooltip](/design-guidelines/tooltips/how-to-add-a-tooltip)
+
+[Tooltip title](/design-guidelines/tooltips/tooltip-title)
+
+[Your completed tooltip](/design-guidelines/tooltips/your-completed-tooltip)
