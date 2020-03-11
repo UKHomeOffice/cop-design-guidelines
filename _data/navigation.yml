@@ -1,0 +1,9 @@
+sidebar:
+  title: 'Form design guidelines'
+  nav: guideline-side-nav
+
+guideline-side-nav:
+  - title: 'Tooltips'
+    children:
+      - title: 'Overview'
+        url: /design-guidelines/tooltip/overview
