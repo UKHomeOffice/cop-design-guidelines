@@ -10,6 +10,7 @@ collections:
     output: true
 url: https://digitalpatterns.github.io/design-guidelines/
 description: Design Guidelines for Forms and BPMN / DMN Models
+repository: digitalpatterns/design-guidelines
 theme: jekyll-theme-tactile
 relative_links:
   enabled: true
