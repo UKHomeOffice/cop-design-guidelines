@@ -5,6 +5,8 @@ permalink: pretty
 header_links:
   GitHub: https://github.com/digitalpatterns/design-guidelines
 
+repository: digitalpatterns/design-guidelines
+
 defaults:
   -
     scope:
