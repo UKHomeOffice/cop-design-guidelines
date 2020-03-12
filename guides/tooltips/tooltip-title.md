@@ -1,6 +1,6 @@
 # Tooltip Title
 
-Having filled in your [tooltip explanation](/design-guidelines/tooltips/tooltip-explanation) you now need to create a title for the tooltip. If you do not create a custom title for the tooltip it will display with the default `Help`. It is recommended that you use a custom title rather than resorting to the default.
+Having filled in your [tooltip explanation](/design-guidelines/guides/tooltips/tooltip-explanation) you now need to create a title for the tooltip. If you do not create a custom title for the tooltip it will display with the default `Help`. It is recommended that you use a custom title rather than resorting to the default.
 
 To do this go to the field in the builder. Click the `Edit JSON` button.
 
@@ -23,10 +23,10 @@ A 'tooltip title' corresponds to GDS 'details summary' text. It should explain c
 
 **In the near future the Forms Platform will add a tooltip title text box in the component edit modal so plain text can be typed straight into that box to create a title.**
 
-[Tooltip overview](/design-guidelines/tooltips/overview)
+[Tooltip overview](/design-guidelines/guides/tooltips/overview)
 
-[How to add a tooltip](/design-guidelines/tooltips/how-to-add-a-tooltip)
+[How to add a tooltip](/design-guidelines/guides/tooltips/how-to-add-a-tooltip)
 
-[Tooltip explanation](/design-guidelines/tooltips/tooltip-explanation)
+[Tooltip explanation](/design-guidelines/guides/tooltips/tooltip-explanation)
 
-[Your completed tooltip](/design-guidelines/tooltips/your-completed-tooltip)
+[Your completed tooltip](/design-guidelines/guides/tooltips/your-completed-tooltip)

@@ -5,10 +5,10 @@ Your completed tooltip should appear like this. A clear title which expands when
 
 **Figure 8. Completed tooltip**
 
-[Tooltip overview](/design-guidelines/tooltips/overview)
+[Tooltip overview](/design-guidelines/guides/tooltips/overview)
 
-[How to add a tooltip](/design-guidelines/tooltips/how-to-add-a-tooltip)
+[How to add a tooltip](/design-guidelines/guides/tooltips/how-to-add-a-tooltip)
 
-[Tooltips explanation](/design-guidelines/tooltips/tooltip-explanation)
+[Tooltips explanation](/design-guidelines/guides/tooltips/tooltip-explanation)
 
-[Tooltips title](/design-guidelines/tooltips/tooltip-title)
+[Tooltips title](/design-guidelines/guides/tooltips/tooltip-title)

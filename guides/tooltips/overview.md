@@ -12,10 +12,10 @@ When you are considering adding a tooltip ask yourself if your user really needs
 
 You need to make a judgement about whether a significant number of users will need a field to be explained in greater detail. You can ask a user researcher for advice if you are unsure, and it is a good idea to ask your user researcher to pay particular attention to tooltips when your form is tested with users.
 
-[How to add a tooltip](/design-guidelines/tooltips/how-to-add-a-tooltip)
+[How to add a tooltip](/design-guidelines/guides/tooltips/how-to-add-a-tooltip)
 
-[Tooltip explanation](/design-guidelines/tooltips/tooltip-explanation)
+[Tooltip explanation](/design-guidelines/guides/tooltips/tooltip-explanation)
 
-[Tooltip title](/design-guidelines/tooltips/tooltip-title)
+[Tooltip title](/design-guidelines/guides/tooltips/tooltip-title)
 
-[Your completed tooltip](/design-guidelines/tooltips/your-completed-tooltip)
+[Your completed tooltip](/design-guidelines/guides/tooltips/your-completed-tooltip)

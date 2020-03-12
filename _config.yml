@@ -1,9 +1,9 @@
-title: MOJ technical guidance
+title: Technical Design Patterns
 
 permalink: pretty
 
 header_links:
-  GitHub: https://github.com/ministryofjustice/technical-guidance
+  GitHub: https://github.com/digitalpatterns/technical-guidance
 
 defaults:
   -
