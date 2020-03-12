@@ -40,6 +40,7 @@ The tooltip box is where you will add your tooltip explanation. This is the sent
 
 ![add-tooltip-description-modal](https://user-images.githubusercontent.com/61820359/76081828-e08e0a80-5fa1-11ea-8a7e-9b4b04054f40.png)
 
+
 **Figure 3. Tooltip explanation without any markup**
 
 If you need to use html markup, for example to create a summary list or a table, you can, just copy and paste or enter your html into the box.
