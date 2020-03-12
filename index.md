@@ -63,8 +63,8 @@ which covers service design more broadly.
 ### General formbuilder_guides
 {% endif %}
 
-{% for guide in formbuilder_group.items %}
-- [{{ guide.title }}]({{ guide.url | relative_url }})
+{% for forms in formbuilder_group.items %}
+- [{{ forms.title }}]({{ forms.url | relative_url }})
 {% endfor %}
 {% endfor %}
 
