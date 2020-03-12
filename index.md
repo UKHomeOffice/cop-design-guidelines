@@ -52,11 +52,11 @@ which covers service design more broadly.
 
 ## Formbuilder
 
-{% assign formbuilder_guides = site.pages
+{% assign formbuilder = site.pages
   | where: "formbuilder", true
   | group_by: "category" %}
 
-{% for formbuilder_group in formbuilder_guides %}
+{% for formbuilder_group in formbuilder %}
 {% if formbuilder_group.name != "" %}
 ### {{ formbuilder_group.name }}
 {% else %}
@@ -64,7 +64,7 @@ which covers service design more broadly.
 {% endif %}
 
 {% for guide in formbuilder_group.items %}
-- [{{ formbuilder.title }}]({{ formbuilder.url | relative_url }})
+- [{{ guide.title }}]({{ guide.url | relative_url }})
 {% endfor %}
 {% endfor %}
 
