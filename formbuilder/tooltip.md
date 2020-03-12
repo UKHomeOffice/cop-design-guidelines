@@ -31,7 +31,7 @@ It is never acceptable to add html content via the Form Builder palette to creat
 
 **As a general rule you should not be editing code in JSON in order to build forms. One exception to this is adding your [tooltip title](/design-guidelines/formbuilder/tooltip/#tooltip-title). If you find you are editing JSON ask yourself if there is actually a feature for this in builder that you are not using. If there is no existing feature consult with Forms Platform development team.**
 
-The tooltip text box is where you will enter your [tooltip explanation](/design-guidelines/guides/tooltips/tooltip-explanation).
+The tooltip text box is where you will enter your [tooltip explanation](/design-guidelines/formbuilder/tooltip/#tooltip-explanation).
 
 
 ## Tooltip Explanation
@@ -52,7 +52,7 @@ If you need to use html markup, for example to create a summary list or a table,
 
 ## Tooltip Title
 
-Having filled in your [tooltip explanation](/design-guidelines/guides/tooltips/tooltip-explanation) you now need to create a title for the tooltip. If you do not create a custom title for the tooltip it will display with the default `Help`. It is recommended that you use a custom title rather than resorting to the default.
+Having filled in your [tooltip explanation](/design-guidelines/formbuilder/tooltip/#tooltip-explanation) you now need to create a title for the tooltip. If you do not create a custom title for the tooltip it will display with the default `Help`. It is recommended that you use a custom title rather than resorting to the default.
 
 To do this go to the field in the builder. Click the `Edit JSON` button.
 
