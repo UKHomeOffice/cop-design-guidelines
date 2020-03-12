@@ -34,6 +34,7 @@ It is never acceptable to add html content via the Form Builder palette to creat
 The tooltip text box is where you will enter your [tooltip explanation](/design-guidelines/guides/forms/tooltip/#tooltip-explanation).
 
 
+
 ## Tooltip Explanation
 
 The tooltip box is where you will add your tooltip explanation. This is the sentence or brief paragraph that will appear when the user clicks on the [tooltip title](/design-guidelines/guides/forms/tooltip/#tooltip-title). The information provided in the explanation is very context-specific. You may need to consult with your content designer or user researcher. However there are some general rules. The tooltip explanation should clarify for the user what is required in the associated field. It is alright to use specialist terminology your user will understand, but keep the explanation as simple and clear as possible. The explanation can be typed directly into the ``Tooltip`` box in the builder without the need to use html markup.
