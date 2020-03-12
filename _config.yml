@@ -18,6 +18,11 @@ defaults:
       guide: true
   -
     scope:
+      path: "formbuilder"
+    values:
+      guide: true
+  -
+    scope:
       path: "principles"
     values:
       principle: true
