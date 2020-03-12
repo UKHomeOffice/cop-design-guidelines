@@ -52,7 +52,8 @@ These guidelines are intended to help you build forms as quickly and easily as p
 ### General guides
 {% endif %}
 
-{% for guide in guide_group.items %}
+{% assign sorted_guide_groups =  guide_group.items | sort: 'order' %}
+{% for guide in sorted_guide_groups %}
 - [{{ guide.title }}]({{ guide.url | relative_url }})
 {% endfor %}
 {% endfor %}
