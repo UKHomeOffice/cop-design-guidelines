@@ -1,3 +1,7 @@
+---
+category: Formbuilder
+expires: 2020-12-31
+---
 # To Tooltip Or Not To Tooltip?
 
 Tooltips are a very important component of your form. They can significantly impact the user's ability to use a form as they provide explanations of what is required by a field, as well as guidance on what to do if the required information is not available to the user.

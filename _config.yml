@@ -1,78 +1,23 @@
----
-title: Design Guidelines
-timezone: UTC
-collections:
-  posts:
-    title: Posts
-    output: true
-  uploads:
-    title: Uploads
-    output: true
-url: https://digitalpatterns.github.io/design-guidelines/
-description: Design Guidelines for Forms and BPMN / DMN Models
-repository: digitalpatterns/design-guidelines
-theme: jekyll-theme-tactile
-relative_links:
-  enabled: true
-  collections: true
-navigation:
-- title: Form design guidelines
-  url: "/design-guidelines/tooltips/overview"
-plugins:
-  - jekyll-seo-tag
-  
-topnav_title: Form Guidelines
-# this appears on the top navigation bar next to the home button
-site_title: Guidelines for Forms and BPMN / DMN
-# this appears in the html browser tab for the site title (seen mostly by search engines, not users)
-company_name: Digital Patterns
-# this appears in the footer
-github_editme_path: digitalpatterns/design-guidelinex/blob/gh-pages/
-exclude:
-  - .idea/
-  - .gitignore
-  - vendor
-  
-collections:
-  tooltips:
-    output: false
-# collections are declared here. this renders the content in _tooltips and processes it, but doesn't output it as actual files in the output unless you change output to true
+title: MOJ technical guidance
+
+permalink: pretty
+
+header_links:
+  GitHub: https://github.com/ministryofjustice/technical-guidance
 
 defaults:
   -
     scope:
-      path: ""
-      type: "pages"
+      path: "standards"
     values:
-      layout: "page"
-      comments: false
-      # if you don't want to use Commento.io and just hide comments, change true to false wherever you see the comments property
-      search: true
-      sidebar: home_sidebar
-      topnav: topnav
+      standard: true
   -
     scope:
-      path: ""
-      type: "tooltips"
+      path: "guides"
     values:
-      layout: "page"
-      search: true
-      tooltip: true
-
+      guide: true
   -
     scope:
-      path: ""
-      type: "posts"
+      path: "principles"
     values:
-      layout: "post"
-      comments: false
-      # if you don't want to use Commento.io and just hide comments, change true to false wherever you see the comments property
-      search: true
-      sidebar: home_sidebar
-      topnav: topnav
-
-sidebars:
-- home_sidebar
-- mydoc_sidebar
-
-github: [metadata]
+      principle: true
