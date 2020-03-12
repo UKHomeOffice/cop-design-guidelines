@@ -31,12 +31,12 @@ It is never acceptable to add html content via the Form Builder palette to creat
 
 **As a general rule you should not be editing code in JSON in order to build forms. One exception to this is adding your [tooltip title](/guides/forms/tooltip/#tooltip-title). If you find you are editing JSON ask yourself if there is actually a feature for this in builder that you are not using. If there is no existing feature consult with Forms Platform development team.**
 
-The tooltip text box is where you will enter your [tooltip explanation](/guides/forms/tooltip/#tooltip-explanation).
+The tooltip text box is where you will enter your [tooltip explanation](/design-guidelines/guides/forms/tooltip/#tooltip-explanation).
 
 
 ## Tooltip Explanation
 
-The tooltip box is where you will add your tooltip explanation. This is the sentence or brief paragraph that will appear when the user clicks on the [tooltip title](/guides/forms/tooltip/#tooltip-title). The information provided in the explanation is very context-specific. You may need to consult with your content designer or user researcher. However there are some general rules. The tooltip explanation should clarify for the user what is required in the associated field. It is alright to use specialist terminology your user will understand, but keep the explanation as simple and clear as possible. The explanation can be typed directly into the ``Tooltip`` box in the builder without the need to use html markup.
+The tooltip box is where you will add your tooltip explanation. This is the sentence or brief paragraph that will appear when the user clicks on the [tooltip title](/design-guidelines/guides/forms/tooltip/#tooltip-title). The information provided in the explanation is very context-specific. You may need to consult with your content designer or user researcher. However there are some general rules. The tooltip explanation should clarify for the user what is required in the associated field. It is alright to use specialist terminology your user will understand, but keep the explanation as simple and clear as possible. The explanation can be typed directly into the ``Tooltip`` box in the builder without the need to use html markup.
 
 ![add-tooltip-description-modal](https://user-images.githubusercontent.com/61820359/76081828-e08e0a80-5fa1-11ea-8a7e-9b4b04054f40.png)
 
@@ -52,7 +52,7 @@ If you need to use html markup, for example to create a summary list or a table,
 
 ## Tooltip Title
 
-Having filled in your [tooltip explanation](/guides/forms/tooltip/#tooltip-explanation) you now need to create a title for the tooltip. If you do not create a custom title for the tooltip it will display with the default `Help`. It is recommended that you use a custom title rather than resorting to the default.
+Having filled in your [tooltip explanation](/design-guidelines/guides/forms/tooltip/#tooltip-explanation) you now need to create a title for the tooltip. If you do not create a custom title for the tooltip it will display with the default `Help`. It is recommended that you use a custom title rather than resorting to the default.
 
 To do this go to the field in the builder. Click the `Edit JSON` button.
 
