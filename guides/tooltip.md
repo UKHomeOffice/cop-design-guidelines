@@ -1,5 +1,5 @@
 ---
-category: Components
+category: Form Builder Components
 expires: 2020-12-31
 ---
 # To Tooltip Or Not To Tooltip?
