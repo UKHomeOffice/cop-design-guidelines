@@ -50,6 +50,24 @@ which covers service design more broadly.
 {% endfor %}
 {% endfor %}
 
+## Formbuilder
+
+{% assign formbuilder_guides = site.pages
+  | where: "formbuilder", true
+  | group_by: "category" %}
+
+{% for formbuilder_group in formbuilder_guides %}
+{% if formbuilder_group.name != "" %}
+### {{ formbuilder_group.name }}
+{% else %}
+### General formbuilder_guides
+{% endif %}
+
+{% for guide in formbuilder_group.items %}
+- [{{ formbuilder.title }}]({{ formbuilder.url | relative_url }})
+{% endfor %}
+{% endfor %}
+
 
 ## Adding new guidance
 
