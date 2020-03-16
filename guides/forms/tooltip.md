@@ -30,9 +30,10 @@ Then click on the tooltip text box.
 
 It is never acceptable to add html content via the Form Builder palette to create a tooltip for a field. This is because you will be adding unnecessary code which may cause the form to render too slowly. Also the more code there is, the more opportunities there are for errors.
 
-**As a general rule you should not be editing code in JSON in order to build forms. One exception to this is adding your [tooltip title](/design-guidelines/guides/forms/tooltip/#tooltip-title). If you find you are editing JSON ask yourself if there is actually a feature for this in builder that you are not using. If there is no existing feature consult with Forms Platform development team.**
+**As a general rule you should not be editing code in JSON in order to build forms. One exception to this is adding your [tooltip title]({{ '/guides/forms/tooltip/#tooltip-title' | relative_url }}). If you find you are editing JSON ask yourself if there is actually a feature for this in builder that you are not using. If there is no existing feature consult with Forms Platform development team.**
 
-The tooltip text box is where you will enter your [tooltip explanation](/design-guidelines/guides/forms/tooltip/#tooltip-explanation).
+
+The tooltip text box is where you will enter your [tooltip explanation]({{'/guides/forms/tooltip/#tooltip-explanation' | relative_url }}).
 
 
 
