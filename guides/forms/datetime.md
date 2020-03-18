@@ -59,8 +59,8 @@ To change the drop-down box to an input box, click on 'Month' then 'Select' and 
 Save your change by clicking the 'save' button then 'update form', then 'Preview in UK Gov styling'. This opens a separate window and shows you the form, now with three input boxes for the date instead of drop down boxes.
 
 ## Changing your day component to pre-populate with a specific date
-The most likely reason for wanting your date boxes to be prepopulated is because they need to record the date on which they were filled in. It makes form-filling much easier for a user who has to record the date on every form they fill in.
-You can create pre-populated date boxes after the point when you have dragged and dropped the 'day' button into the container box. Follow all the steps until you have clicked on 'number' to change from a drop-down box to an input box, then click the 'data' tab at the top of the page. Click the 'custom default value'. A list will appear of all the custom javascript that can be used. You need to use 'moment'. This is the object you can use in the piece of javascript you are going to be asked to write.
+The most likely reason for wanting your date boxes to be prepopulated is because the user needs to record the date on which the form was filled in. It makes form-filling much easier for a user who has to record the date on every form they fill in.
+You can create pre-populated date boxes after the point when you have dragged and dropped the 'day' button into the container box. Follow all the steps until you have clicked on 'number' to change from a drop-down box to an input box, then click the 'data' tab at the top of the page. Click the 'custom default value'. A list will appear of all the custom javascript that can be used. You need to use [moment](https://momentjs.com). This is the object you can use in the javascript you are going to be asked to write.
 
 ![Day Custom Input]({{ '/images/DayCustomInput.png' | relative_url }})
 
