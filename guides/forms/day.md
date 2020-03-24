@@ -8,7 +8,7 @@ order: 2
 ## Introduction
 You do not need to add a date/time component just for capturing the form submission date. This is implicitly captured when the user submits the form.
 You should add a 'day' box to your form if you want to capture the day/month/year, for example an individual's date of birth, or the date on which an event occurred.
-You should add a 'date and time' box to your form if you will not only need to capture the day/month/year, but also the time in hrs/mins.
+You should add a **[date/time]({{'/guides/forms/datetime/#datetime-component' | relative_url }})** box to your form if you will not only need to capture the day/month/year, but also the time in hrs/mins.
 
 **After each change click 'Save' and 'Update Form' to save your changes.**
 
@@ -64,9 +64,13 @@ Save your change by clicking the 'Save' button then 'Update Form', then 'Preview
 The most likely reason for wanting your date boxes to be prepopulated is because the user needs to record the date on which the form was filled in. It makes form-filling much easier for a user who has to record the date on every form they fill in.
 You can create pre-populated date boxes after the point when you have dragged and dropped the 'Day' button into the container box. Follow all the steps until you have clicked on 'Number' to change from a drop-down box to an input box, then click the 'Data' tab at the top of the page. Click the 'Custom Default Value'. A list will appear of all the custom javascript that can be used. You need to use [moment](https://momentjs.com). This is the object you can use in the javascript you are going to be asked to write.
 
-![Day Custom Input]({{ '/images/DayCustomInput.png' | relative_url }})
+![Data tab]({{ '/images/DataTab.png' | relative_url }})
 
-**Figure 6. Custom Default Value panel**
+**Figure 6. Data tab**
+
+![Day Custom Input]({{ '/images/CustomDefaultValue.png' | relative_url }})
+
+**Figure 7. Custom Default Value panel**
 
 Write the following javascript in the code box.
 
@@ -86,13 +90,13 @@ In the 'Day Component' editor, click on the 'Validation' tab. Three check boxes 
 
 ![Mandatory day/month/year]({{ '/images/MandatoryDayFields.png' | relative_url }})
 
-**Figure 7. Mandatory day/month/year**
+**Figure 8. Mandatory day/month/year**
 
 The error message **must** be entered into the 'Custom Error Message' box. Otherwise Formio will auto-generate a message which will not be helpful to the user. The error message that appears when the date has not been completed should relate to that particular issue.
 
 ![Custom Error Message]({{ '/images/CustomErrorMessage.png' | relative_url }})
 
-**Figure 8. Custom Error Message**
+**Figure 9. Custom Error Message**
 
 
 There are government guidelines for writing error messages. They can be found [here](https://design-system.service.gov.uk/components/error-message). They must be relevant, clear, and informative e.g. 'Passport issue date is required' (see Figure 8.).
@@ -123,7 +127,7 @@ Your form will need to display an error message when the date has either not bee
 
 ![PassporError]({{ '/images/PassportDate.png' | relative_url }})
 
-**Figure 9. Passport issue date error message**
+**Figure 10. Passport issue date error message**
 
 If you have customised the form validation then you need to write a custom error message in that JavaScript. In the JavaScript example it is possible to see the error messages between the single quotation marks (''). They appear after ```valid =``` This is where you will put your custom error message between single quotation marks e.g. ```valid = 'Passport issue date is required'```.
 
@@ -135,10 +139,10 @@ It is important to note Formio will disable the 'Submit' button if the form has 
 
 ![Disable submit button]({{ '/images/DisableSubmitButton.png' | relative_url }})
 
-**Figure 10. 'Disable on Form Invalid' button not selected**
+**Figure 11. 'Disable on Form Invalid' button not selected**
 
 If you 'untick' this box then the 'Submit' button will not be greyed out. It will remain clickable, but display an error message if the mandatory fields are not complete. For example:
 
 ![Error]({{ '/images/ValidationError.png' | relative_url }})
 
-**Figure 11.  Validation error message on submit**
+**Figure 12.  Validation error message on submit**
