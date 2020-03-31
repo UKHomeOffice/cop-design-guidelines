@@ -1,5 +1,5 @@
 ---
-category: BPMN
+category: Workflow
 expires: 2020-12-31
 order: 1
 ---
