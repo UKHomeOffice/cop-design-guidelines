@@ -3,19 +3,19 @@ category: Workflow
 expires: 2020-12-31
 order: 4
 ---
-# Building a form and BPMN and deploying to COP
+# Building a form and BPMN, and deploying to COP
 
 ## Introduction
 
 This is a guide to how to build simple forms in Form Builder, linking those forms to a BPMN, and then uploading the BPMN to COP, using the Camunda modeller.
 
-The first form is a 'request' form, in this example a request for holiday or time off, the second form displays the data submitted in the first form and allows the approver to approve or deny the holiday request.
+The first form is a 'request' form, in this example a request for holiday or time off. The second form is an 'approval' form. It displays the data submitted in the first form, and allows the approver to approve or deny the holiday request.
 
-This guide will explain not only how to build a form but how to associate it to a BPMN and then deploy that to COP.
+This guide will explain not only how to build a form, but how to associate it to a BPMN, and then deploy that to COP.
 
 ## Building the forms
 
-You need to decide which components you need on your form. For this first example form there are four components:
+You need to decide which components you need on your form. For this first example, 'holiday request' form, there are three components:
 
 * Disabled text box pre-populated with the user's given and family name.
 
@@ -28,7 +28,11 @@ You need to decide which components you need on your form. For this first exampl
 
 **Figure 1. form builder edit mode**
 
-When you preview your form in GovUK styling it will look like this.
+The 'Requester' box is pre-populated with the user's given name and family name as a result of data context interpolation i.e. once a user is logged in, the UI will pre-populate any boxes with information attached to that login: given name, surname, and email. Once a user has signed onto their shift, this information might also include shift details and roles. For more information on data context interpolation see [here]({{'/guides/forms/data-context' | relative_url }}).
+
+Information on how to add the day components for the 'from' and 'to' inputs [here]({{'/guides/forms/day' | relative_url }}).
+
+When you preview your form in GovUK styling it will look like this:
 
 
 
@@ -36,17 +40,33 @@ When you preview your form in GovUK styling it will look like this.
 
 **Figure 2. holiday request form in GDS preview**
 
-The 'holiday request workflow' has been triggered by the 'holiday request' form. Once the 'holiday request' form has been submitted, the workflow transition to the approval task, which will present the 'approval form' to the 'approver'. The 'approval form' must contain the following components:
+The 'holiday request workflow' has been triggered by the 'holiday request' form. Once the 'holiday request' form has been submitted, the workflow transitions to the approval task, which will present the 'approval form' to the 'approver'. The 'approval form' must contain the following components:
 
-* details of person who requested holiday.
+* details of person who requested holiday: 'Requester'.
 
 * 'from' and 'to' dates of the holiday period requested.
+
+* approval 'yes' or 'no' radio buttons.
 
 ![approve holiday request form]({{ '/images/approve-holiday-request-preview.jpeg' | relative_url }})
 
 **Figure 3. approval form in form builder edit mode**
 
-The form will be presented to the 'approver' in a prepopulated state. See Figure 4.
+In order to pre-populate the 'Requester' field you need to open the component in Form Builder edit mode and select 'Calculated Value' panel. In the JavaScript section add this:
+
+```
+value = data.processContext.holidayRequest.requester;
+```
+The above code loads the variable 'holidayRequest' from the process instance, and then the property 'requester'.
+
+In order to prepopulate the 'from' box on the 'approve holiday request' form, follow the same process. In Form Builder edit mode for the 'from' component select the 'Calculated Value' panel. In the Javascript section enter this:
+
+```
+value = data.processContext.holidayRequest.fromDate;
+```
+The above code loads the variable 'holidayRequest' from the process instance, and then the property 'fromDate'. This same principle is applied to the pre-populated 'to' box. Use the same code but replace 'fromDate' with 'toDate'.
+
+The form will be presented to the 'approver' in a pre-populated state. See Figure 4.
 
 ![approve holiday request form gds preview]({{ '/images/approve-holiday-request-gds-preview.jpeg' | relative_url }})
 
@@ -54,13 +74,13 @@ The form will be presented to the 'approver' in a prepopulated state. See Figure
 
 ## Building the simple workflow for 'holiday request'
 
-The workflow will be built in the Camunda modeller. Once you open the modeller you will be presented with this option ' Creat a BPMN diagram or Create a DMN diagram'. Select 'BPMN diagram'. See Figure 4.
+The workflow will be built in the Camunda modeller. Once you open the modeller you will be presented with this option 'Create a BPMN diagram or Create a DMN diagram'. Select 'BPMN diagram'. See Figure 4.
 
 ![camunda modeller options]({{ '/images/camunda-modeller-options.jpeg' | relative_url }})
 
 **Figure 4. camunda modeller options**
 
-You will then be presented with the process properties panel. See Figure 5. It is important you provide the role in the candidate starter groups or you won't see it appear in the UI. Once the process has been started with the candidate group if you don't have that role you will never see the process. So for example if your manager or approver doesn't have the same role they will not see the approval task.
+You will then be presented with the process properties panel. See Figure 5. It is important you provide the role in the 'Candidate Starter Groups' or you won't see it appear in the UI. Once the process has been started with the candidate group if you don't have that role you will never see the process. So for example if your manager or approver doesn't have the same role they will not see the approval task.
 
 
 ![process properties panel]({{ '/images/process-properties-panel.jpeg' | relative_url }})
@@ -75,66 +95,97 @@ The modeller automatically provides a start event and the properties panel. Sele
 
 **Figure 6. start event notation**
 
-Next fill in the 'Id' and 'Name' boxes. The 'Id' is useful for writing unit tests because you can reference activities by the id. If it's an autogenerated id it's difficult to remember or know what they are. The 'Name' box should correspond to the label on the start node. Click on the 'Forms' tab. In the 'Form Key' box is where you put the name of the form. This will be used by the UI to load the form.
+Next fill in the 'Id' and 'Name' boxes. The 'Id' is useful for writing unit tests because you can reference activities by the id. If it's an autogenerated id it's difficult to remember or know what it is. The 'Name' box should correspond to the label on the start node. Click on the 'Forms' tab. Write the name of the form in the 'Form Key' box. This will be used by the UI to load the form.
 
 
 ### How to add the 'Approver form'
 
 
-Next create the 'approval task'. Select 'Create Task' icon on the palette or click on the start node and then select the 'Append Task' icon. Once you click on it, give the task a name typed into the box. Always use a verb. A task should always be an action. In this example use 'Approve holiday request'. This task then needs to be converted to a specific type. Click on the 'change type' spanner icon. A drop down list will appear. Select 'User Task' (see Figure 7.)
+Next create the 'approval task'. Select 'Create Task' icon on the palette or click on the start node and then select the 'Append Task' icon. Once you have clicked on it, type the  task name in the 'Name' box. **Always use a verb. A task should always be an action.** In this example use 'Approve holiday request'. This task then needs to be converted to a specific type. If you want to present the 'approve holiday request' form to the 'approver' then you need to convert the task to a 'user task'. To do this click on the 'change type' spanner icon. A drop down list will appear. Select 'User Task' (see Figure 7.)
 
 ![change type drop down list]({{ '/images/change-type-drop-down-list.jpeg' | relative_url }})
 
 **Figure 7. 'Change type' drop down list**
 
-The tab for the 'User task' appears. In the Id box fill in a descriptive Id that will be easy to remember. In 'Details' section there are three pieces of information that need to be complete. First you need to decide who the form will go to. You can assign the form to an individual, a candidate group/team. The individual can be static, i.e. a specifically identified individual, or dynamic, i.e. a value that's derived from the form.
+The tab for the 'User task' appears. In the 'Id' box fill in a descriptive Id that will be easy to remember. In the 'Details' section there are three pieces of information that need to be completed. First you need to decide who the task will go to. You can assign the form to an individual, or a candidate group/team. The individual can be static, i.e. a specifically identified individual, or dynamic, i.e. a value that's derived from the form or loaded from an external source.
 
-If you want to assign it to an individual, but one that is dynamically provided by the form then input the following variable expression
+If you want to assign it to an individual, but one that is dynamically provided by the form, then input the following variable expression:
 
  ```
  ${S(holidayRequest).prop('approverEmail').stringValue()}
  ```
 
- This expression
+ This expression:
 
  ```
  ${S(holidayRequest)
    ```
-   references the variable 'holidayRequest' which contains the data that's been submitted.
+ references the variable 'holidayRequest' which contains the data that's been submitted.
 
-   ```
-   .prop('approverEmail').stringValue()}
-   ```
-  Inside the object is a property called 'approverEmail' and I want the value of that i.e. the email address of the individual who needs to approve the form. [For more info on spin](https://docs.camunda.org/manual/latest/reference/spin/json/01-reading-json/)
+```
+.prop('approverEmail').stringValue()}
+```
 
-The form can also be assigned to a group. In 'Candidate Groups' box use almost the same expression except the property will be e.g. 'approver Team' rather than 'approver Email'
+Inside the object is a property called 'approverEmail' and you want the value of that i.e. the email address of the individual who needs to approve the form. [For more info on spin](https://docs.camunda.org/manual/latest/reference/spin/json/01-reading-json/)
+
+The task can also be assigned to a group. In the 'Candidate Groups' box use almost the same expression except the property will be e.g. 'approverTeam' rather than 'approverEmail':
 
 ```
 ${S(holidayRequest).prop('approverTeam').stringValue()}
 ```
-The 'approver Team' can be a comma separated string. Camunda will automatically covert that into a list.
+The 'approver team' can be a comma separated string. Camunda will automatically convert that into a list.
 
-If your task requires a due date, for example if you want to use due dates to order tasks in the COP task list, then fill in the due date box. If you use a dynamic expression then the due date will be created when the task is created. This is the dynamic expression to use.
+If your task requires a due date, for example if you want to use due dates to order tasks in the COP task list, then fill in the due date box. If you use a dynamic expression then the due date will be set when the task is created. This is the dynamic expression to use:
 
 ```
 ${now()}
 ```
-You also need to fill a description in the 'Description' box so that the Task View will explain the nature of the task.
+You also need to fill a description in the 'Documentation' box so that the 'Task View' will explain the nature of the task.
+
+![documentation box]({{ '/images/documentation-box.png' | relative_url }})
+
+**Figure 8. 'Documentation' box**
 
 Now we want to present a form to the 'approver'. Do this by clicking on the 'Form' tab. Copy the name of the 'approve holiday request' form and put it in the 'Form Key' box.
 
 ![approve request form key]({{ '/images/approve-holiday-request-form-key.jpeg' | relative_url }})
 
-**Figure 8. approve request form key**
+**Figure 9. approve request form key**
 
-Now finish the BPMN by attaching an 'End Event'. Follow the same process. First give it an Id. Give it a name to represent that the process is complete e.g. 'Request approved'.
+Now finish the BPMN by attaching an 'End Event'. Follow the same process. First give it an 'Id'. Give it a name to represent that the process is complete e.g. 'Request approved'. The BPMN is now complete. Your next task is to deploy it to COP.
 
 ### How to deploy the BPMN to COP
 
-Next save the file in the appropriate repository, please consult your developer/tech arch. If you are testing this locally you can save it in your local directory.
-
-Then click on the arrow button at the end of the toolbar 'Deploy Current Diagram'. Give the diagram a name e.g. 'Holiday Request' then the url of the workflow engine that's running.
+Save the file in the appropriate repository. (Please consult with your developer/tech arch. If you are testing this locally you can save it in your local directory.) Then click on the arrow button at the end of the toolbar 'Deploy Current Diagram'. Give the diagram a name e.g. 'Holiday Request', then the url of the workflow engine that's running (See Fig. 10).
 
 ![deploy to cop]({{ '/images/deploy-to-cop.jpeg' | relative_url }})
 
-**Figure 9. Deploy to COP**
+**Figure 10. Deploy to COP**
+
+<br/>
+
+Once this is deployed to COP you should see this:
+
+
+![holiday request form]({{ '/images/holiday-request-form-cop.jpeg' | relative_url }})
+
+**Figure 11. Holiday request form in COP**
+
+<br/>
+
+Once the form has been submitted, the 'approver' will see an 'approval task':
+
+
+![approver task]({{ '/images/approver-task.jpeg' | relative_url }})
+
+**Figure 12. Approval task**
+
+<br/>
+Once the 'approver' clicks on the 'Action' button they will be presented with the 'approval form':
+
+![approver task cop]({{ '/images/approval-form-cop.jpeg' | relative_url }})
+
+**Figure 13. Approval form**
+
+<br/>
+Once the 'approver' has completed the 'approval form' the task is submitted and the workflow is finished. The 'approval task' disappears from the 'approvers' work queue.
