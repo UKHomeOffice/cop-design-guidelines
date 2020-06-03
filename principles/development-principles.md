@@ -53,3 +53,33 @@ The main principles to follow when designing your BPMN are listed below, more de
 * Don't use external tasks, the COP central team are looking to move away from using external tasks. Should you need a service that isn't available please consult the COP technical team.
 
 Following these guidelines should ensure you design effective BPMNs and test them thoroughly and efficiently.
+
+## DMNs
+
+DMN stands for decision model and notation. It's an industry specification for designing, modelling, and executing business rules.
+The rules are based on a 'when', 'then' framework. It's represented in a spreadsheet of 'inputs' and 'outputs'.
+
+![example DMN]({{'/images/example-dmn.jpeg' | relative_url }})
+
+**Figure 2. Example decision model 'Input' equates to 'when', 'Output' equates to 'then'**
+
+You use DMNs in conjunction with BPMNs to execute. So when you have a need for complex business rules, you want to use DMNs for that rather than creating custom Javascript or Java code to build rules. Also because it's DMN it's a specification that allows business users to understand the constructs. Normally you'd use a business rule to determine some action then use a gateway to take the path based on the outcome of the decision model.
+
+**There can be a collection of 'Inputs' and a collection of 'Outputs'**
+
+The DMN is built separately and then is referenced in the BPMN, so it works in a similar way to a 'call activity.
+
+To build your DMN open the BPMN modeller and hover over the 'new document' icon in the top left hand corner. When the drop down menu appears select 'Create new DMN table'.
+
+![new DMN dropdown box]({{'/images/new-dmn-dropdown.jpeg' | relative_url }})
+
+**Figure 3. 'New DMN' drop down box**
+
+An empty unsaved DMM table appears.
+
+![new DMN diagram]({{'/images/new-dmn-table.jpeg' | relative_url }})
+
+**Figure 4. 'New DMN' table**
+
+
+### Testing
