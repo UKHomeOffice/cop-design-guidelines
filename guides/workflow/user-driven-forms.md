@@ -62,3 +62,32 @@ The 'vehicle details' form might end with the question 'is there a mechanic's re
 * User tasks cannot be asynchronous. The tasks have to be synchronous and the workflow keeps moving forward through the tasks to a 'safe point' or the end of the workflow.
 
 * The workflow should return one single task at a time, not a collection. If you need to display a collection of forms, then show one at a time and use a loop construct to show the other forms one after another.
+
+## Categorising user tasks
+Unfortunately, at this time, there is no way to specify a task category in the BPMN using the modeller view. In the past all tasks were displayed in COP without being identified with their process. This was unhelpful because it didn't provide context for the task. Now tasks are displayed in a particular category which is defined at the process level. For example 'approve request' can belong to a 'book holiday' BPMN or a 'security pass request', so now in COP those two tasks will be separated and contextualised with their process.
+
+![task category]({{ '/images/task-category.jpeg' | relative_url }})
+
+**Figure 5. Task 'approve request' is clarified by appearing in the 'Approve holiday request' BPMN, or 'Building security pass request'.  If it was just a list of 'approve request' tasks without context if would be difficult to know what to do next for each task.**
+
+In order to achieve this you have to open the BPMN in XML mode by clicking on the XML tab at the bottom of the modeller.
+
+![XML tab]({{ '/images/xml-modeller.jpeg' | relative_url }})
+
+**Figure 6. XML tab at the bottom of the modeller**
+
+You will be presented with an XML view of the entire BPMN. In the top section of the BPMN there is an XML attribute called 'targetNamespace'. By default it is set to
+
+```
+targetNamespace="http://bpmn.io/schema/bpmn"
+```
+
+Replace the text between the ```""``` with whatever category your task belongs to e.g.
+
+```
+targetNamespace="Approve holiday requests"
+```
+Your category has to have meaning and context i.e. the action, in this case 'approve' in its context 'holiday request' (not just 'request' because this is too vague). Please consult your user researcher if you are unsure of the meaning and context.
+
+
+**If you have multiple tasks in your BPMN, all the tasks will fall into one category. The category is assigned at the process level, you cannot assign it at the individual task level.**
