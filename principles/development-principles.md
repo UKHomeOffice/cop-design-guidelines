@@ -9,6 +9,8 @@ expires: 2020-12-31
 This section is intended to provide guidance to the best practice in designing BPMNs, DMNs, and Forms.
 Best practice guidelines ensure that BPMNs are simple and efficient. The forms arising from good BPMNs run quickly on the browser, ensuring users remain engaged until the end of the process, and the UI doesn't 'time out' before the form has been completed. Taking care with naming conventions, methods, and style in BPMN, and effective testing, result in a bug-free, business-focussed, process model.
 
+If you are a developer responsible for building BPMNs, forms, and DMNs, it is your responsibility to write appropriate tests for them i.e. tests that cover the majority of scenarios defined in your BPMN/form/DMN. This includes 'happy paths' and 'unhappy paths'. 'Unhappy paths' are error conditions e.g. if you are making a call to a remote service, your test should cover the scenario when the service fails to respond. 'Happy paths' are the normal, expected behaviour of your BPMNs. You should not expect your testers to run these first-level tests. These should be performed by you, the developer, first, and the BPMN handed to the tester only for final testing of 'edge' conditions.
+
 ## BPMNs
 
 ### Testing
