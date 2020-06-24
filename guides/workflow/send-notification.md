@@ -18,11 +18,15 @@ You will have built a BPMN for your form [in the usual way]({{'/guides/workflow/
 
 In order for your BPMN to create an email/text notification you need to drag and drop a 'Create Task' icon onto your diagram. Click on the 'spanner' icon to change the type to 'Call Activity'.
 
+![call activity configurations]({{'/images/call-activity-notification.jpeg' | relative_url }})
+
+**Figure 1. 'Call activity' configuration**
+
 ![send notification BPMN]({{'/images/send-notification-bpmn.jpeg' | relative_url }})
 
-**Figure 1. 'Call activity' containing the 'Send notification' subprocess**
+**Figure 2. 'Call activity' containing the 'Send notification' subprocess**
 
-Then fill in the 'Call activity' details panel. You need to specify which 'Call activity' you want to apply. First fill in the type of call activity you are invoking. Select BPMN from the drop-down list. Then in the 'Called Element' input box, type 'send-notification'. **You need to tick the 'Business Key' check box.** This will populate the 'Business Key Expression' box:
+Then fill in the 'Call activity' details panel. You need to specify which 'Call activity' you want to apply. First fill in the type of call activity you are invoking. To do this select BPMN from the drop-down list. Then in the 'Called Element' input box, type 'send-notification'. **You need to tick the 'Business Key' check box.** This will populate the 'Business Key Expression' box:
 
 ```
 #{execution.processBusinessKey}
@@ -48,7 +52,7 @@ For each of these pieces of data it is necessary to go to the Input/Output tab a
 
 ### 'notificationPayload' variable
 
-Before you configure the variable mappings for the subprocess you will need to set up the data that will be used in the variables tab.
+Before you configure the variable mappings for the subprocess you will need to set up the data that will be used in the 'Variables' tab.
 The 'notificationPayload' needs a data structure that resembles the following:
 
 
@@ -58,7 +62,11 @@ The 'notificationPayload' needs a data structure that resembles the following:
 "email": {
     "subject":  "Subject of the email",
     "body" : "HTML string of the email body",
-    "recipients": [   "recipient1@example.com","recipient2@example.com"]
+    "recipients": [   "recipient1@example.com","recipient2@example.com"],
+    "attachmentUrls" : [
+      "https://file-service/files/testFile.pdf",
+      "formPdf.pdf"
+    ]
 },
 "sms" : {
   "message" : "Text message",
@@ -69,40 +77,115 @@ The 'notificationPayload' needs a data structure that resembles the following:
 }
 ```
 
-It is possible to have either an 'email' section or an 'sms' section or both, as in the example. The mandatory requirements for the email section is the 'recipients'. If 'subject' and 'body' need to be customised then they need to be included here. Otherwise default 'subject' and 'body' will be generated and the only specified attribute will be 'recipients'.  
+It is possible to have either an 'email' section or an 'sms' section or both, as in the example. The mandatory requirements for the email section is the 'recipients'. If 'subject' and 'body' need to be customised then they need to be included here. Otherwise default 'subject' and 'body' will be generated and the only specified attribute will be 'recipients'. There might also be attachments to an email (although not to an SMS). The attachment can be an absolute URL or the key to the file that is stored in the PDF S3 bucket. This bucket configuration would have been set up as a part of the workflow engine deployment. It is also possible to send a PDF of the form as an attachment.
 
-So, first select the Input/Output tab. Then click on the 'plus' sign above the 'Input Parameters' box. This renders a section 'Input Parameter' with a 'Name', 'Type', and 'Value'. Change the input in the 'Name' box to a name of your choice. Our example is 'notificationPayload'. Change the 'Type' from 'Text' to 'Script' in the dropdown box. This then provides some updated options 'Script Format', 'Script Type', and 'Script'. In the 'Script Format' type in 'groovy'.
+The mandatory requirements for the SMS are the 'message' and 'phoneNumbers'. If you don't want to send an SMS do not include the SMS attribute. If you only want to send an SMS and not an email then don't include the 'email' attribute.
 
-In
+In order to configure the variable mappings, first select the Input/Output tab. Then click on the 'plus' sign above the 'Input Parameters' box. This renders a section 'Input Parameter' with a 'Name', 'Type', and 'Value'. Change the input in the 'Name' box to a name of your choice. Our example is 'notificationPayload'. Change the 'Type' from 'Text' to 'Script' in the dropdown box. This then provides some updated options 'Script Format', 'Script Type', and 'Script'. In the 'Script Format' type in 'groovy', and then the following, using the attributes specific to the form  e.g. 'managerEmail':
 
-In the 'Script' box you need to generate a JSON object that defines an SMS section and/or an email section.
+```
+def holidayRequest = execution.getVariable('holidayRequest');
 
+def businessKey = holidayRequest.prop('businessKey').stringValue();
+def requester = holidayRequest.prop('requester').stringValue();
 
+def body = "${requester} has requested a holiday"
+def smsMessage = "${requester} has requested a holiday"
 
+def notificationPayload = """
+    {
+      "businessKey": "${businessKey}",
+      "email" : {
+        "body": "${body}",
+        "subject": "Holiday request",
+        "recipients" : [
+            ${${holidayRequest.prop('managerEmail').stringValue()}
+        ]
+      },
+      "sms" : {
+        "message" : "${smsMessage}",
+        "phoneNumbers": [
+            ${holidayRequest.prop('managerPhone').stringValue()}
+        ]
+      }
+    }""".toString();
+notificationPayload
+```
 
 Having done that click on the 'Variables' tab. Click on the plus sign above the 'In Mapping' box. Boxes labelled 'Type', 'Source' and 'Target' will appear.
 
-In the 'Source' box, use the name that you configured in the Input/Output mapping. So in our example that is 'formsForPdf'. This means in your BPMN there is a variable called 'formsForPdf'.
+In the 'Source' box, use the name that you configured in the Input/Output mapping. So in our example that is 'notificationPayload'. This means in your BPMN there is a variable called 'notificationPayload'.
 
-In the 'Target' box add 'generateCasePdf'. **This must be used in every situation.**
+In the 'Target' box add 'notificationPayload'. **This must be used in every situation.**
 
-![variable mapping]({{'/images/variable-mapping.jpeg' | relative_url }})
+![notification variable mapping]({{'/images/notification-variable-mapping.jpeg' | relative_url }})
 
-**Figure 4. Subprocess 'generateCasePdf' variable mapping**
+**Figure 4. Subprocess 'send-notification' variable mapping**
 
-### 'recipients' variable
-The PDF has been generated and uploaded to S3. The subprocess now needs to know who to send the PDF attachments to. First go to the Input/Output tab and, as for the 'generateCasePdf' variable give the variable name in the 'Input parameters' box, e.g. 'recipients'. Go to the Input/Output tab and in the 'Script' box type the Groovy code that will build the 'recipients' list. Below is an example.
+The above 'notificationPayload' will be used by the subprocess to send both an email and an sms message to the manager notifying them of a new holiday request.
+
+#### Adding attachments
+
+Even if a PDF of a form has been generated and sent to all recipients any attachments to that form will need to be sent separately, as a PDF cannot have attachments. This is achieved by sending a copy of the form as an email attachment. The attachments to the form will appear as separate attachments to the email.
+
+
+![PDF plus notify]({{'/images/pdf-plus-notify.jpeg' | relative_url }})
+
+**Figure 5. Generate PDF and send notification**
+
+This generates the PDF of the form but instead of sending it straight away it returns back a variable that contains the id of the form that is stored in the PDF S3 bucket. This id will be added to a collection as well as any attachments associated with the form.
+
+
+![PDF variable out mapping]({{'/images/pdf-variable-outmapping.jpeg' | relative_url }})
+
+**Figure 6. Attachment ID variable 'Out Mapping'**
+
+The 'Out Mapping' takes the attachment ids from the 'generate PDF' subprocess and stores them in a new variable called 'attachmentUrls'.
+
+It is possible to add attachments to the email/s by using the code below, following the 'if' conditional statement. In this example you are taking the attachments from the form and passing the urls into a collection which will be used by the 'send-notification' subprocess to send the email/s with attachments.
+
 
 ```
-def lineManager = execution.getVariable('myForm').prop("lineManagerEmail").stringValue();
-def submitter = execution.getVariable('myForm').prop("form").prop("submittedBy").stringValue();
-def recipients = [submitter, lineManager];
-recipients
+def attachmentUrls = execution.getVariable('attachmentUrls')
+if (holidayRequest.hasProp("attachments")) {
+    holidayRequest.prop("attachments").elements().each {
+        it -> attachmentUrls.add(it.prop("url").stringValue())
+    }
+}
+
+def notificationPayload = """
+    {
+      "businessKey": "${businessKey}",
+      "email" : {
+        "body": "${body}",
+         "subject": "Approve/Reject Holiday request",
+         "attachmentUrls": ${S(attachmentUrls).toString()}
+         "recipients" : [
+            ${holidayRequest.prop('managerEmail').stringValue()}
+         ]
+      },
+      "sms" : {
+        "message" : "${smsMessage}",
+        "phoneNumbers": [
+             ${holidayRequest.prop('managerPhone').stringValue()}
+        ]
+      }
+    }""".toString();
+notificationPayload
 ```
 
-In the above code the 'recipients' are the line manager email, and the person who submitted the form. Your recipients will depend on the use case of the form you are building.
-Next go back to the 'Variables' tab and map the 'recipients' to the target source. In the 'Target' box add 'recipients'. **This must be used in every circumstance**
 
-![recipients variable]({{'/images/recipients-variable.jpeg' | relative_url }})
 
-**Figure 5. 'recipients' variable**
+### 'initiatedBy' variable
+
+This variable contains the data of the person who has initiated the subprocess. This can be data extracted from the form or the variable from the main BPMN.
+
+![initiated by variable mapping]({{'/images/initiated-by-variable-mapping.jpeg' | relative_url }})
+
+**Figure 7. 'initiatedBy' variable mapping**
+
+In this example the process variable 'initiatedBy' is passed into the subprocess. This value can be customised by extracting it from other sources.
+
+## Testing your BPMN
+
+If you need to write a test for your BPMN do not include the subprocess in your testing, because that has already been tested thoroughly and is known to work, and it has its own testing framework. Instead you need to create a 'stub' that mimics the call process so you can test all the other parts of your BPMN end to end.
