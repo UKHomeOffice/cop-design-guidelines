@@ -10,6 +10,8 @@ order: 5
 
 ### 'role'
 
+A role is defined in 'Keycloak' SSO. In order to define a role in 'Keycloak' you must discuss the role with the 'Keycloak Administrator'.
+
 A role is assigned to an individual user. Once a user has logged into COP, after starting a shift, on navigating to the 'Forms' section, they are presented with a list of forms that their role authorises them to fill in. This list is filtered based on the user's role.
 The form is linked to the process definition in the BPMN. The workflow service presents all the process definitions (as forms) that match the user's role. In summary the role performs three functions:
 

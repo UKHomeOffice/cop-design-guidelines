@@ -147,9 +147,11 @@ It is possible to add attachments to the email/s by using the code below, follow
 
 ```
 def attachmentUrls = execution.getVariable('attachmentUrls')
+def attachments = org.camunda.spin.Spin.JSON("[]");
+
 if (holidayRequest.hasProp("attachments")) {
     holidayRequest.prop("attachments").elements().each {
-        it -> attachmentUrls.add(it.prop("url").stringValue())
+        it -> attachments.append(it.prop("url").stringValue())
     }
 }
 
@@ -159,7 +161,7 @@ def notificationPayload = """
       "email" : {
         "body": "${body}",
          "subject": "Approve/Reject Holiday request",
-         "attachmentUrls": ${S(attachmentUrls).toString()}
+         "attachmentUrls": ${attachments.toString()}
          "recipients" : [
             ${holidayRequest.prop('managerEmail').stringValue()}
          ]
