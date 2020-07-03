@@ -19,7 +19,11 @@ The form is linked to the process definition in the BPMN. The workflow service p
 
 * The second function is determining whether the user is authorised see a process instance (a submitted form) within a case. (In terms of COP, a case represents a collection of process instances all linked by a unique reference e.g. Border Force reference. A case never ends because it's a container that organises together all the process instances that are triggered by an individual or another event over time.)
 
+**If the role is left blank at the 'Process Properties' panel in the 'Candidate Starter Groups' then the process instance will be available to anybody in the case view. However the only action they would be able to form is 'generate PDF'.**
+
 * The third function is determining which actions a user is authorised to perform on a case.
+
+
 
 
 ### 'team'
@@ -41,7 +45,7 @@ This example process definition is for the submission and approval of a timeshee
 ![teams roles bpmn ]({{ '/images/teams-roles-bpmn.jpeg' | relative_url }})
 **Figure 2. A simple timesheet approval workflow**
 
-On the 'Process properties' panel in the 'General' tab it is necessary to fill in the 'Candidate Starter Groups' box with the correct role/roles (it could be a comma separated string) e.g. 'copge'(COP general user). This role is configured in Keycloak SSO. Please consult your technical architect and/or your user researcher for the correct role definition for your particular use case.
+On the 'Process properties' panel in the 'General' tab it is necessary to fill in the 'Candidate Starter Groups' box with the correct role/roles (it could be a comma separated string) e.g. 'copge'(COP general user). This role is configured in Keycloak SSO. If the role is left blank at the 'Process Properties' panel in the 'Candidate Starter Groups' then the process instance will be available to anybody in the case view. However the only action they would be able to form is 'generate PDF'. Please consult your technical architect and/or your user researcher for the correct role definition for your particular use case.
 
 ![teams roles starter configuration]({{ '/images/teams-roles-candidate-starter-configuration.jpeg' | relative_url }})
 
