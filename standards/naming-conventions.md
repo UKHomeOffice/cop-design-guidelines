@@ -129,7 +129,6 @@ Pools may have more than one lane, in which case the pool should have a name tha
 
 **Figure 7. Appropriately named multi-lane pool**
 
-
 #### General points
 
 * Use sentences when naming BPMN symbols. So only capitalise the initial word (apart from proper nouns).E.g. 'Holiday request and approval'.
@@ -137,3 +136,31 @@ Pools may have more than one lane, in which case the pool should have a name tha
 * Avoid using technical terms that would not be clear to all readers. So don't use a class name that appears in the code but instead every day language that any non-programmer would understand. 'Store data to S3' is not a good BPMN activity name. 'S3' is a technical construct and not all readers would understand what it is. Instead write 'Store to database'.
 
 * Do not use abbreviations. It's easy to fall into using company or department specific abbreviations, but these should be avoided as they may be confusing to other readers.
+
+
+### Environment properties
+
+Your BPMN will require access to certain properties that are part of the runtime environment. This is because as the BPMN executes it accesses the context provided by the properties in the environment. These are defined in AWS Secrets Manager. The management and configuration of AWS Secrets Manager is owned by your DevOps engineer. If you require a new property in the Secrets Manager for your BPMN, e.g. an email address, then you should define the property and give it to your DevOps. Remember to specify which service requires the property.  
+
+#### Creating/Requesting new properties
+
+* Check there is not already a property in Secrets Manager that you can use. You may need to consult your Lead Developer.
+
+* Once you are certain you need a new property, make sure you use the correct naming convention.  
+
+#### Naming convention
+
+The first part of the name is the technical service name e.g gov.notify.template
+
+The second part of the name will be the product name e.g. buildingPass.
+
+The final part of the name is the activity of your BPMN e.g. submitApplication. This is specific to your BPMN but you must make sure you use the same name in your BPMN as your DevOp set up in the Secrets Manager.
+
+To ensure that the BPMN fails if the property isn't present in Secrets Manager use the following expression:
+
+```
+${environment.getRequiredProperty('gov.notify.template.buildingPass.submitApplication')}
+
+```
+
+This will make sure your BPMN fails immediately, so you know either you called the wrong property, or the property you require is not in the Secrets Manager.
