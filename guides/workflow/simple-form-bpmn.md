@@ -3,7 +3,7 @@ category: Workflow
 expires: 2020-12-31
 order: 4
 ---
-# Building a form and BPMN, and deploying to COP
+# Building a form and BPMN, and deploying to COP and eForms
 
 ## Introduction
 
@@ -154,7 +154,13 @@ Now we want to present a form to the 'approver'. Do this by clicking on the 'For
 
 Now finish the BPMN by attaching an 'End Event'. Follow the same process. First give it an 'Id'. Give it a name to represent that the process is complete e.g. 'Request approved'. The BPMN is now complete. Your next task is to deploy it to COP.
 
-### How to deploy the BPMN to COP
+### How to deploy the BPMN to COP and eForms
+
+The Camunda workflow engine underpins both COP and eForms, but the COP engine is highly customised to suit Border Force requirements, whereas eForms is more general. The deployment process for both is the same, the only difference is the URL.
+
+The following instructions apply both to deployment to COP and eForms with two exceptions: only certain people are allowed to deploy to eForms, and a different URL will be provided when it comes to eForms.
+
+Only certain roles e.g. tech lead, have clearance to deploy to eForms. This encourages developers to fully test their BPMN before deploying it, rather than deploying it and testing it afterwards.
 
 Save the file in the appropriate repository. (Please consult with your developer/tech arch. If you are testing this locally you can save it in your local directory.) Then click on the arrow button at the end of the toolbar 'Deploy Current Diagram'. Give the diagram a name e.g. 'Holiday Request', then the url of the workflow engine that's running (See Fig. 10).
 
@@ -162,30 +168,73 @@ Save the file in the appropriate repository. (Please consult with your developer
 
 **Figure 10. Deploy to COP**
 
-<br/>
+REST endpoint for COP:
+```
+<COP_URL>/rest/camunda/deployment/create
+```
+REST endpoint for eForms:
+```
+<eForms_URL>/camunda/engine-rest/deployment/create
+```
 
-Once this is deployed to COP you should see this:
+**Consult your tech lead for the appropriate COP_URL or eForms_URL**
+
+Next you need a 'bearer token'. A 'bearer token' is a form of access token, that encodes information about the individual deploying the BPMN.
+The 'bearer token' only lasts for a limited amount of time so you need to generate one every time you deploy your BPMN to COP and eForms.
+
+You can download a tool called [postman](https://www.postman.com). Documentation on how to use postman can be found [here](https://learning.postman.com). This [link](https://learning.postman.com/docs/sending-requests/authorization/#oauth-20tells) shows you how to get a 'bearer token'. In the form 'Get New Access Token' you need to fill in 'Token Name','Callback URL', 'Auth URL', 'Access Token URL', and a 'Client ID'.
+
+* 'Token Name' - this can be anything, as it only lasts for a short period of time.
+
+* 'Callback URL' - this can be your local machine, so fill in 'http://localhost:8080'
+
+* 'Auth URL' - your DevOps will provide you with the 'Auth URL', you then need to input it into the 'Auth URL' box and add '/auth'.
+
+* 'Access Token URL' - will be available from your Tech Lead or DevOps engineer. Input it into the 'Access Token URL' box and add '/token'.
+
+* 'Client ID' - will either be 'eforms' or 'www'(for COP).
+
+![get new access token]({{ '/images/get-new-access-token.jpeg' | relative_url }})
+
+**Figure 11. Get New Access Token form**
+
+Once you have filled in all that information click 'Request Token'. You will then be redirected to 'Keycloak SSO'. Next you will be prompted to authenticate using your credentials.
+
+Once you have authenticated you will be presented with the 'Manage Access Tokens' box. Copy the access token value. Next, go to the BPMN modeller and paste that token into the 'Token' box.
+
+![bearer token]({{ '/images/bearer-token-input.jpeg' | relative_url }})
+
+**Figure 12. Bearer token input**
+
+Then you click the 'Deploy button'.
+
+Once the BPMN is deployed to eForms you should see this:
+
+![form successfully deployed to eForms]({{ '/images/successful-deploy-to-eforms.jpeg' | relative_url }})
+
+**Figure 13. Form successfully deployed to eForms**
+
+Once the BPMN is deployed to COP you should see this:
 
 
 ![holiday request form]({{ '/images/holiday-request-form-cop.jpeg' | relative_url }})
 
-**Figure 11. Holiday request form in COP**
+**Figure 14. Holiday request form in COP**
 
-<br/>
 
 Once the form has been submitted, the 'approver' will see an 'approval task':
 
 
 ![approver task]({{ '/images/approver-task.jpeg' | relative_url }})
 
-**Figure 12. Approval task**
+**Figure 15. Approval task**
 
 <br/>
 Once the 'approver' clicks on the 'Action' button they will be presented with the 'approval form':
 
 ![approver task cop]({{ '/images/approval-form-cop.jpeg' | relative_url }})
 
-**Figure 13. Approval form**
+**Figure 16. Approval form**
 
 <br/>
 Once the 'approver' has completed the 'approval form' the task is submitted and the workflow is finished. The 'approval task' disappears from the 'approvers' work queue.
