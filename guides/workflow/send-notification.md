@@ -1,7 +1,7 @@
 ---
 category: Workflow
 expires: 2020-12-31
-order: 7
+order: 5
 ---
 # Sending a notification using AWS SES/SMS
 

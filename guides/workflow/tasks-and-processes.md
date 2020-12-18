@@ -1,7 +1,7 @@
 ---
 category: Workflow
 expires: 2020-12-31
-order: 6
+order: 2
 ---
 
 # Tasks and Processes in relation to BPMN

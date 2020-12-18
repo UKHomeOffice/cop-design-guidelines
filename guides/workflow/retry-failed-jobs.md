@@ -1,7 +1,7 @@
 ---
 category: Workflow
 expires: 2020-12-31
-order: 3
+order: 6
 ---
 # Retry Failed Jobs via REST API
 
