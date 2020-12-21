@@ -1,7 +1,7 @@
 ---
 category: Workflow
 expires: 2020-12-31
-order: 5
+order: 3
 ---
 
 # Roles and Teams in relation to BPMN
