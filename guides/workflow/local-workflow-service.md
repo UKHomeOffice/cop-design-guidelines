@@ -6,7 +6,7 @@ order: 1
 # Developers - Run the workflow engine locally
 
 ## Introduction
-It is absolutely imperative that developers run the workflow engine locally. Doing this exponentially improves productivity because it allows the quick testing and correcting of BPMNs.
+It is absolutely imperative that developers run the workflow engine locally. Doing this hugely improves productivity because it allows the quick testing and correcting of BPMNs. It will take some time to set up initially but saves time and effort in the long-run.
 
 Running the workflow engine locally allows you to:
 * get quicker feedback if there's a problem with your BPMN without having to ask DevOps to look at the server logs, or use Kibana logs.
@@ -37,7 +37,7 @@ You will also need to install Elasticsearch, PostgreSQL, and Redis. You can use 
 
 You can find a step-by-step guide to installing Elasticsearch [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/getting-started-install.html#run-elasticsearch-local)
 
-Once you have started Elasticsearch if you run the following command from your terminal
+Once you have started Elasticsearch if you run the following command from your terminal:
 
 ```bash
 curl -X GET "localhost:9200/_cat/health?v&pretty"
@@ -45,10 +45,10 @@ curl -X GET "localhost:9200/_cat/health?v&pretty"
 it should return some information about the Elasticsearch cluster. This is how you know it has installed properly. If there is a problem/exception, copy/paste it into Google and you'll find the solution.
 
 ### Installing PostgreSQL
-The Camunda engine requires a relational database, so we use PostgreSQL as the data source. The following documentation contains an example of how to start a PostgreSQL Docker container [here](https://hackernoon.com/how-to-install-postgresql-with-docker-quickly-ki7g363m). You can use [this](https://www.pgadmin.org/) tool to connect to the database. This will ensure that when you start the workflow engine it will talk to the database.
+The Camunda engine requires a relational database, so we use PostgreSQL as the data source. You can find an example of how to start a PostgreSQL Docker container [here](https://hackernoon.com/how-to-install-postgresql-with-docker-quickly-ki7g363m). You can use [this](https://www.pgadmin.org/) tool to connect to the database. This will ensure that when you start the workflow engine it will talk to the database.
 
 ### Installing Redis
-Redis is an 'in-memory' database used for session management within the workflow engine. Instal Redis here.
+Redis is an 'in-memory' database used for session management within the workflow engine. Instal Redis [here](https://www.ionos.com/community/hosting/redis/using-redis-in-docker-containers/).
 
 
 
@@ -82,7 +82,7 @@ Select 'Open', then navigate to the directory where the git clone has  downloade
 
 ![build.gradle]({{ '/images/build-gradle.jpeg' | relative_url }})
 
-**Figure 2. Selecting build.gradle file**
+**Figure 2. Selecting 'build.gradle' file**
 
 
 The following option should appear:
@@ -115,11 +115,11 @@ In this window you need to populate the 'VM options' and you need to set the 'En
 
 #### 'VM Options'
 
-When you select the 'expand window' button on 'VM options' bar it will expand to show an empty box:
+When you select the 'expand window' button on the 'VM options' bar it will expand to show an empty box:
 
 ![Empty VM options]({{ '/images/empty-vm-options.jpeg' | relative_url }})
 
-**Figure 7. 'Edit 'WorkflowServiceApplication' Configuration'**
+**Figure 7. 'VM option' window expanded**
 
 You need to populate this box with the following:
 
@@ -127,7 +127,9 @@ You need to populate this box with the following:
 -Dencryption.passPhrase=test
 -Dencryption.salt=test
 -Daws.elasticsearch.region=eu-west-2
--Daws.elasticsearch.endpoint=http://localhost:9200
+-Daws.elasticsearch.endpoint=localhost
+-Daws.elasticsearch.port=9200
+-Daws.elasticsearch.scheme=http
 -Dauth.url=<CONSULT DEVOPS>
 -Dauth.realm=<CONSULT DEVOPS>
 -Dauth.clientId=<CONSULT DEVOPS>
@@ -138,7 +140,8 @@ You need to populate this box with the following:
 -Ddatabase.driver-class-name=org.postgresql.Driver
 -Daws.s3.formData=<CONSULT DEVOPS>
 -Daws.s3.case-bucket-name=<CONSULT DEVOPS>
-
+-Daws.elasticsearch.credentials.access-key=x
+-Daws.elasticsearch.credentials.secret-key=x
 ````
 
 
@@ -150,7 +153,7 @@ Select the 'Environment Variables' window. A box will appear. Untick the 'includ
 
 ![Environment variables]({{ '/images/environment-variables.jpeg' | relative_url }})
 
-**Figure 8. 'Edit 'WorkflowServiceApplication' Configuration'**
+**Figure 8. Environment Variables**
 
-The AWS Access and Secret Key should have permissions to access both the s3 buckets. You will need to get the appropriate keys from your DevOps. Once you have completed both the 'Environment variables' and the 'VM options' click the 'Apply' button and the 'OK' button.
-Then at the top of the screen select either the 'run' arrow or the 'debug' bug. The 'run' button will start the application, the 'debug' button will start the application in debug mode. This allows you to put 'breakpoints' in your code so you can see the inputs and the outputs of that executing. We would recommend that you always run it in 'debug' mode which will allow you to place 'breakpoints' where you want them without having to re-start the server every time.
+The AWS Access and Secret Keys should have permissions to access both the s3 buckets. You will need to get the appropriate keys from your DevOps. Once you have completed both the 'Environment variables' and the 'VM options' click the 'Apply' button and the 'OK' button.
+Then at the top of the screen select either the 'run' arrow or the 'debug' bug. The 'run' button will start the application, the 'debug' button will start the application in debug mode. This allows you to put 'breakpoints' in your code, so you can see the inputs and the outputs of the code in execution. We would recommend that you always run it in 'debug' mode which will allow you to place 'breakpoints' where you want them without having to re-start the server every time you want to add a 'breakpoint'.
