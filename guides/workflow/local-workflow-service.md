@@ -157,3 +157,50 @@ Select the 'Environment Variables' window. A box will appear. Untick the 'includ
 
 The AWS Access and Secret Keys should have permissions to access both the s3 buckets. You will need to get the appropriate keys from your DevOps. Once you have completed both the 'Environment variables' and the 'VM options' click the 'Apply' button and the 'OK' button.
 Then at the top of the screen select either the 'run' arrow or the 'debug' bug. The 'run' button will start the application, the 'debug' button will start the application in debug mode. This allows you to put 'breakpoints' in your code, so you can see the inputs and the outputs of the code in execution. We would recommend that you always run it in 'debug' mode which will allow you to place 'breakpoints' where you want them without having to re-start the server every time you want to add a 'breakpoint'.
+
+#### How To Get More Detailed Error Information
+
+By default the workflow engine logs its output to your local console as JSON. This means when an exception occurs the stack trace is not always visible or it has been stripped making it difficult to identify an exception.
+
+To solve this problem locally, update the 'logback-spring.xml' file located in the 'resources' directory of the engine. Replace the contents of the file with the following code.
+
+```
+<configuration>
+    <springProfile name="test">
+        <springProperty scope="context" name="springAppName" source="spring.application.name"/>
+        <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+                <providers>
+                    <timestamp>
+                        <timeZone>UTC</timeZone>
+                    </timestamp>
+                    <pattern>
+                        <pattern>
+                            {
+                            "severity": "%level",
+                            "service": "${springAppName:-}",
+                            "pid": "${PID:-}",
+                            "thread": "%thread",
+                            "class": "%logger{40}",
+                            "message": "%message",
+                            "userId": "%X{userId}"
+                            }
+                        </pattern>
+                    </pattern>
+                </providers>
+            </encoder>
+        </appender>
+        <root level="INFO">
+            <appender-ref ref="STDOUT"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="local">
+        <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    </springProfile>
+</configuration>
+```
+This will now output console messages. So if an exception occurs you will be able to see the full stack trace and identify what has gone wrong.
+
+**Remember do not commit this 'logback-spring.xml' file. Just use it locally. If you commit this you will break Kibana**
